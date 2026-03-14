@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - MARIADB_DATABASE=bitnami_wordpress
+      - MARIADB_ROOT_PASSWORD=secretroot
+      - MARIADB_USER=bn_wordpress
+      - MARIADB_PASSWORD=797ea7712224fe28342488a59cfe715722e2a021563127e3609afd7becfc274a
+    volumes:
+      - mariadb_data:/bitnami/mariadb
+
+  wordpress:
+    image: bitnami/wordpress:latest
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    ports:
+      - "8080:8080"
+    environment:
+      - WORDPRESS_DATABASE_HOST=mariadb
+      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
+      - WORDPRESS_DATABASE_USER=bn_wordpress
+      - WORDPRESS_DATABASE_PASSWORD=797ea7712224fe28342488a59cfe715722e2a021563127e3609afd7becfc274a
+      - WORDPRESS_USERNAME=admin
+      - WORDPRESS_PASSWORD=AAuaaaale0!
+      - WORDPRESS_EMAIL=gowtham@peozzle.com
+      - WORDPRESS_BLOG_NAME=Peozzle
+
+      - WORDPRESS_ENABLE_MULTISITE=yes
+      - WORDPRESS_MULTISITE_NETWORK_TYPE=subdomain
+      - WORDPRESS_MULTISITE_HOST=peozzle.local
+
+      - WORDPRESS_SCHEME=http
+
+      - APACHE_HTTP_PORT_NUMBER=8080
+      - WORDPRESS_ENABLE_HTACCESS_PERSISTENCE=yes
+
+    volumes:
+      - wordpress_data:/bitnami/wordpress
+
+volumes:
+  wordpress_data:
+  mariadb_data:

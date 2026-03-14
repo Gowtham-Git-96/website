@@ -1,0 +1,5 @@
+# Jenkinsfile
+git_commands.txt
+version.txt
+docker-compose_1.yml
+# myDockerfile
