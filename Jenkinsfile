@@ -8,7 +8,7 @@ pipeline {
     }
 
     environment {
-        APP_NAME = "MyWebsite"
+        APP_NAME = "mywebsite"
         APP_BUILD_NUMBER = "${BUILD_NUMBER}"
     }
 
