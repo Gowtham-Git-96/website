@@ -25,29 +25,18 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Build Using Docker Agent with Docker YML"
-                sh"docker build -t ${env.APP_NAME}:1.0 ."
-                echo "Build Completed"
+                sh"docker compose up -d"
+                echo "Build using Docker Compose Completed"
             }
         }
 
-        stage("AWS Authentication") {
+        stage("Verify Container") {
             steps {
-                echo "AWS Authentication"
+                sh"docker ps"
             }
         }
 
-        stage("ECR Login") {
-            steps {
-                echo "ECR Login Completed"
-            }
-        }
-
-        stage("Tag and Push to ECR") {
-            steps {
-                echo "Image Pushed Successfully"
-            }
-        }
-
+        
         stage("Debug Branch") {
             steps {
                 echo "BRANCH_NAME = ${env.BRANCH_NAME}"
@@ -55,14 +44,7 @@ pipeline {
             }
         }
 
-        stage("Deploy to ECS") {
-            // when {
-            //     branch "main"
-            // }
-            steps {
-                echo "Image Deployed Successfully"
-            }
-        }
+      
     }
 
     post {
