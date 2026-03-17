@@ -21,7 +21,7 @@ services:
     depends_on:
       - mariadb
     ports:
-      - "8082:8080"
+      - "80:8080"
     environment:
       - WORDPRESS_DATABASE_HOST=mariadb
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
@@ -31,7 +31,7 @@ services:
       - WORDPRESS_PASSWORD=AAuaaaale0!
       - WORDPRESS_EMAIL=gowtham@peozzle.com
       - WORDPRESS_BLOG_NAME=Peozzle
-      - WORDPRESS_MULTISITE_EXTERNAL_HTTP_PORT_NUMBER=8082
+      - WORDPRESS_MULTISITE_EXTERNAL_HTTP_PORT_NUMBER=80
       - WORDPRESS_ENABLE_MULTISITE=yes
       - WORDPRESS_MULTISITE_NETWORK_TYPE=subdomain
       - WORDPRESS_MULTISITE_HOST=peozzle.local
