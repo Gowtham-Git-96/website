@@ -54,4 +54,4 @@ volumes:
 
 networks:
   peozzle_network:
-    driver:bridge
+    driver: bridge
