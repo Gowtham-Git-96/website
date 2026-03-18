@@ -4,7 +4,7 @@ services:
 
   mariadb:
     image: my-peozzle-mariadb:v1
-    container_name: mariadb
+    container_name: my-peozzle-mariadb
     ports:
       - "3306:3306"
     environment:
@@ -13,15 +13,15 @@ services:
       - MARIADB_USER=bn_wordpress
       - MARIADB_PASSWORD=797ea7712224fe28342488a59cfe715722e2a021563127e3609afd7becfc274a
     volumes:
-      - mariadb_data:/bitnami/mariadb
+      - my_peozzle_mariadb_data:/bitnami/mariadb
     networks:
       - peozzle_network
 
   wordpress:
     image: my-peozzle-wordpress:v1
-    container_name: wordpress
+    container_name: my-peozzle-wordpress-container
     depends_on:
-      - mariadb
+      - my-peozzle-mariadb
     ports:
       - "80:8080"
     environment:
@@ -44,13 +44,13 @@ services:
       - WORDPRESS_ENABLE_HTACCESS_PERSISTENCE=yes
 
     volumes:
-      - wordpress_data:/bitnami/wordpress
+      - my_peozzle_wordpress_data:/bitnami/wordpress
     networks:
       - peozzle_network
 
 volumes:
-  wordpress_data:
-  mariadb_data:
+  my_peozzle_wordpress_data:
+  my_peozzle_mariadb_data:
 
 networks:
   peozzle_network:
