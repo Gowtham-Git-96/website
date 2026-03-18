@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   mariadb:
-    image: my-peozzle-mariadb:v1
+    image: mariadb:latest
     container_name: mariadb
     ports:
       - "3306:3306"
@@ -14,11 +14,9 @@ services:
       - MARIADB_PASSWORD=797ea7712224fe28342488a59cfe715722e2a021563127e3609afd7becfc274a
     volumes:
       - mariadb_data:/bitnami/mariadb
-    networks:
-      - peozzle_network
 
   wordpress:
-    image: my-peozzle-wordpress:v1
+    image: bitnami/wordpress:latest
     container_name: wordpress
     depends_on:
       - mariadb
@@ -45,13 +43,8 @@ services:
 
     volumes:
       - wordpress_data:/bitnami/wordpress
-    networks:
-      - peozzle_network
+    
 
 volumes:
   wordpress_data:
   mariadb_data:
-
-networks:
-  peozzle_network:
-    driver:bridge
